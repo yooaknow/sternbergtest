@@ -59,8 +59,7 @@ def setup_screen():
     screen = turtle.Screen()
     screen.title("Sternberg test")
     screen.bgcolor("white")
-    
-    screen.setup(width=500*1.2, height=300*1.2)
+    screen.setup(width=600*1.2, height=400*1.2)
     screen.tracer(0)
     return screen
 
@@ -142,11 +141,15 @@ class SternbergTest:
             text.goto(0, 0)
             text.write("   ".join(map(str, numbers)), align="center", font=("Arial", 16, "bold"))  # Increased spacing between numbers
         else:
-            start_y = 70
+            total_height = 40 * len(numbers)
             for num in numbers:
-                text.goto(0, start_y)
-                text.write(str(num), align="center", font=("Arial", 16, "bold"))
-                start_y -= 40  # Increased spacing between lines
+                total_height = 40 * len(numbers)  # 숫자들의 총 높이
+                start_y = (total_height) // 2  # 화면 중앙에서 시작
+                
+                for num in numbers:
+                    text.goto(0, start_y)
+                    text.write(str(num), align="center", font=("Arial", 16, "bold"))
+                    start_y -= 45  # Increased spacing between numbers in vertical mode
         
         screen.update()
         time.sleep(2)
@@ -176,16 +179,18 @@ class SternbergTest:
         
         def on_key_press(key):
             nonlocal response, correct, user_input
-            if key.lower() == 'v':
+            if key == 'v':
                 response = True
                 user_input = "True"
-            elif key.lower() == 'n':
+            elif key == 'n':
                 response = False
                 user_input = "False"
-        
+
+        # 키보드 입력을 받을 때, 각 키를 직접 on_key_press에 연결
         screen.listen()
         screen.onkey(lambda: on_key_press('v'), 'v')
         screen.onkey(lambda: on_key_press('n'), 'n')
+        
         
         while response is None and int(time.time() * 1000) - start_time < 5000:
             screen.update()
@@ -284,9 +289,9 @@ def show_number_selection():
     
     buttons = [
         Button("3", -75, 30, 20, lambda: start_with_size(3)),
-        Button("4", 75, 30, 20, lambda: start_with_size(4)),
-        Button("5", -75, -50, 20, lambda: start_with_size(5)),
-        Button("6", 75, -50, 20, lambda: start_with_size(6))
+        Button("5", 75, 30, 20, lambda: start_with_size(5)),
+        Button("7", -75, -50, 20, lambda: start_with_size(7)),
+        Button("9", 75, -50, 20, lambda: start_with_size(9))
     ]
     
     for button in buttons:
