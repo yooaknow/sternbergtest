@@ -288,10 +288,10 @@ def show_number_selection():
         test.select_orientation()
     
     buttons = [
-        Button("3", -75, 30, 20, lambda: start_with_size(3)),
+        Button("4", -75, 30, 20, lambda: start_with_size(4)),
         Button("5", 75, 30, 20, lambda: start_with_size(5)),
-        Button("7", -75, -50, 20, lambda: start_with_size(7)),
-        Button("9", 75, -50, 20, lambda: start_with_size(9))
+        Button("6", -75, -50, 20, lambda: start_with_size(6)),
+        Button("7", 75, -50, 20, lambda: start_with_size(7))
     ]
     
     for button in buttons:
